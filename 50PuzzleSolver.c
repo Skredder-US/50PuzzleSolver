@@ -79,9 +79,11 @@ bool isSolved(struct ring rings[NUM_RINGS]) {
         int sum = 0;
 
         for (int ring = 0; ring < NUM_RINGS; ring++) {
-            // Get the value from the current ring or the ring beneath if there's a gap (see pic)
+            // Get the value from the current ring
             int rotatedCol = (rings[ring].rotation + col) % LEN;
             int value = rings[ring].outer[rotatedCol];
+            
+            // if current ring has a gap here, get the value in the gap from the ring beneath
             if (value == GAP) {
                 rotatedCol = (rings[ring + 1].rotation + col) % LEN;
                 value = rings[ring + 1].inner[rotatedCol];
